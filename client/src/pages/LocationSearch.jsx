@@ -59,7 +59,7 @@ function LocationSearch() {
       setLoading(true);
       setInputError('');
       try {
-        const response = await axios.get('https://zomato-kgmy.onrender.com/search/location', {
+        const response = await axios.get('https://zomato-kgmy.onrender.com/restaurants/search/location', {
           params: { lat: latitude, long: longitude, radius: parseFloat(radius) },
         });
         setRestaurants(response.data);

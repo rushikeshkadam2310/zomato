@@ -37,8 +37,8 @@ function RestaurantList() {
   useEffect(() => {
     const fetchFilters = async () => {
       try {
-        const citiesResponse = await axios.get('https://zomato-kgmy.onrender.com/cities');
-        const cuisinesResponse = await axios.get('https://zomato-kgmy.onrender.com/cuisines');
+        const citiesResponse = await axios.get('https://zomato-kgmy.onrender.com/restaurants/cities');
+        const cuisinesResponse = await axios.get('https://zomato-kgmy.onrender.com/restaurants/cuisines');
         console.log('Cities response:', citiesResponse.data); // Log the response
         console.log('Cuisines response:', cuisinesResponse.data); // Log the response
 
@@ -54,7 +54,7 @@ function RestaurantList() {
     const fetchRestaurants = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://zomato-kgmy.onrender.com?page=${page}&limit=${limit}`, {
+        const response = await axios.get(`https://zomato-kgmy.onrender.com/restaurants?page=${page}&limit=${limit}`, {
           params: filters,
         });
         setRestaurants(response.data.restaurants); 

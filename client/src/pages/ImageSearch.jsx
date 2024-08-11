@@ -52,7 +52,7 @@ function ImageSearch() {
     formData.append('image', image);
 
     try {
-      const response = await axios.post('https://zomato-kgmy.onrender.com/search/image', formData, {
+      const response = await axios.post('https://zomato-kgmy.onrender.com/restaurants/search/image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
