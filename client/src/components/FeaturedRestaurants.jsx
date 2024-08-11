@@ -10,7 +10,7 @@ const FeaturedRestaurants = () => {
   useEffect(() => {
     const fetchFeaturedRestaurants = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/restaurants/featured');
+        const response = await axios.get('https://zomato-kgmy.onrender.com/featured');
         setFeaturedRestaurants(response.data);
       } catch (error) {
         setError('Failed to fetch featured restaurants. Please try again later.');

@@ -16,7 +16,7 @@ function RestaurantDetail() {
     // Function to fetch restaurant details
 const fetchRestaurant = async () => {
   try {
-    const response = await axios.get(`http://localhost:5000/restaurants/${id}`);
+    const response = await axios.get(`https://zomato-kgmy.onrender.com/${id}`);
     setRestaurant(response.data);
 
     const imageResponse = await axios.get(`https://api.unsplash.com/search/photos`, {
