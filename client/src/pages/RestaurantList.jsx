@@ -11,36 +11,36 @@ function RestaurantList() {
   const [loading, setLoading] = useState(true);
   const [inputPage, setInputPage] = useState('');
 
-  // Local state to hold filter inputs
+
   const [filterInputs, setFilterInputs] = useState({
     city: '',
     averageSpend: '',
     cuisines: ''
   });
 
-  // State to hold applied filters
+
   const [filters, setFilters] = useState({
     city: '',
     averageSpend: '',
     cuisines: ''
   });
 
-  // State to hold cities and cuisines
+
   const [cities, setCities] = useState([]);
   const [cuisines, setCuisines] = useState([]);
 
-  // State to manage dropdown visibility
+
   const [cityDropdownVisible, setCityDropdownVisible] = useState(false);
   const [cuisineDropdownVisible, setCuisineDropdownVisible] = useState(false);
 
-  // Fetch restaurants and filters
+
   useEffect(() => {
     const fetchFilters = async () => {
       try {
         const citiesResponse = await axios.get('https://zomato-kgmy.onrender.com/restaurants/cities');
         const cuisinesResponse = await axios.get('https://zomato-kgmy.onrender.com/restaurants/cuisines');
-        console.log('Cities response:', citiesResponse.data); // Log the response
-        console.log('Cuisines response:', cuisinesResponse.data); // Log the response
+        console.log('Cities response:', citiesResponse.data); 
+        console.log('Cuisines response:', cuisinesResponse.data); 
 
         setCities(citiesResponse.data);
         setCuisines(cuisinesResponse.data);
@@ -110,7 +110,7 @@ function RestaurantList() {
 
   const applyFilters = () => {
     setFilters(filterInputs);
-    setPage(1); // Reset to the first page when applying filters
+    setPage(1);
   };
 
   const filteredCities = cities.filter(city =>

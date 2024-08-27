@@ -6,8 +6,8 @@ import RestaurantList from './pages/RestaurantList';
 import RestaurantDetail from './pages/RestaurantDetail';
 import LocationSearch from './pages/LocationSearch';
 import ImageSearch from './pages/ImageSearch';
-import Layout from './components/Layout'; // Adjust the path based on where you place the Layout component
-import NotFound from './components/NotFound'; // Import the NotFound component
+import Layout from './components/Layout'; 
+import NotFound from './components/NotFound'; 
 import './index.css';
 import FeaturedRestaurants from './components/FeaturedRestaurants';
 

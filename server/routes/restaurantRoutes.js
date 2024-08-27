@@ -1,14 +1,16 @@
 const fs = require("fs");
 const express = require('express');
 const multer = require('multer');
-
+const dotenv = require('dotenv');
+dotenv.config();
+const Restaurant = require("../models/Restaurant");
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { GoogleAIFileManager } = require("@google/generative-ai/server");
-const genAI = new GoogleGenerativeAI("AIzaSyAWJbZCLrytFKC3BO77k7-o3SEDtqE9HWY");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-const fileManager = new GoogleAIFileManager("AIzaSyAWJbZCLrytFKC3BO77k7-o3SEDtqE9HWY");
+const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+
 const router = express.Router();
-const Restaurant = require("../models/Restaurant");
 
 const upload = multer({ dest: 'uploads/' });
 
@@ -26,8 +28,8 @@ router.get("/featured", async (req, res) => {
 
 router.get("/cities", async (req, res) => {
   try {
-    // Assuming you have a City model
-    const cities = await Restaurant.find().distinct('city'); // Use 'distinct' to get unique city names
+
+    const cities = await Restaurant.find().distinct('city'); 
     res.json(cities);
   } catch (err) {
     console.error(err);
@@ -37,8 +39,8 @@ router.get("/cities", async (req, res) => {
 
 router.get("/cuisines", async (req, res) => {
   try {
-    // Assuming you have a Restaurant model and cuisines are stored as an array
-    const cuisines = await Restaurant.find().distinct('cuisines'); // Use 'distinct' to get unique cuisines
+
+    const cuisines = await Restaurant.find().distinct('cuisines');
     res.json(cuisines);
   } catch (err) {
     console.error(err);
@@ -50,7 +52,7 @@ router.get("/cuisines", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const restaurant = await Restaurant.findOne({
-      restaurantId: req.params.id,
+      _id: req.params.id,
     });
     if (!restaurant) return res.status(404).send("Restaurant not found");
     res.send(restaurant);
@@ -90,7 +92,9 @@ router.get("/", async (req, res) => {
     const restaurants = await Restaurant.find(query)
       .limit(limitNumber)
       .skip((pageNumber - 1) * limitNumber);
-
+      if(pageNumber > totalPages) {
+        return res.status(404).send("Page Number must be less than or equal to total pages");
+      }
     res.json({
       page: pageNumber,
       totalPages: totalPages,
@@ -172,7 +176,6 @@ router.post('/search/image', upload.single('image'), async (req, res) => {
   });
 
     const restaurants = await Restaurant.find({ cuisines: filterCuisine });
-
     res.json(restaurants);
   } catch (err) {
     console.error(err);
