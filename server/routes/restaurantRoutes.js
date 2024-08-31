@@ -52,7 +52,7 @@ router.get("/cuisines", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const restaurant = await Restaurant.findOne({
-      _id: req.params.id,
+      restaurantId: req.params.id,
     });
     if (!restaurant) return res.status(404).send("Restaurant not found");
     res.send(restaurant);
