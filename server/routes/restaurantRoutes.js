@@ -6,9 +6,9 @@ dotenv.config();
 const Restaurant = require("../models/Restaurant");
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { GoogleAIFileManager } = require("@google/generative-ai/server");
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI("IzaSyAWJbZCLrytFKC3BO77k7-o3SEDtqE9HWY");
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
+const fileManager = new GoogleAIFileManager("IzaSyAWJbZCLrytFKC3BO77k7-o3SEDtqE9HWY");
 
 const router = express.Router();
 
