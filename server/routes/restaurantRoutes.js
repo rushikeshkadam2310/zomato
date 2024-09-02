@@ -136,6 +136,7 @@ router.get("/search/location", async (req, res) => {
 });
 
 
+
 router.post('/search/image', upload.single('image'), async (req, res) => {
   try {
     const image = req.file;
@@ -176,11 +177,13 @@ router.post('/search/image', upload.single('image'), async (req, res) => {
   });
 
     const restaurants = await Restaurant.find({ cuisines: filterCuisine });
+
     res.json(restaurants);
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
   }
 });
+
 
 module.exports = router;
